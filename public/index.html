@@ -22,6 +22,31 @@
     <div id="countText"></div>
   </div>
 
+  <!-- Floating chat toggle -->
+  <button id="chatToggle" class="chatToggle" type="button" aria-label="Buka panel chat" title="Chat">
+    <!-- Chat bubble icon (inline SVG) -->
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M4 4.8C4 3.8 4.8 3 5.8 3h12.4C19.2 3 20 3.8 20 4.8v11.4c0 1-.8 1.8-1.8 1.8H9l-4.2 3v-3H5.8c-1 0-1.8-.8-1.8-1.8V4.8z" fill="currentColor"/>
+      <path d="M7.2 8.2h9.6M7.2 12h6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+  </button>
+
+  <!-- Chat panel -->
+  <section id="chatPanel" class="chatPanel" aria-hidden="true">
+    <header class="chatHeader">
+      <div class="chatTitle">Chat</div>
+      <button id="chatClose" class="chatClose" type="button" aria-label="Tutup chat">✕</button>
+    </header>
+
+    <div id="chatHistory" class="chatHistory" role="log" aria-live="polite"></div>
+
+    <form id="chatForm" class="chatForm" autocomplete="off">
+      <input id="chatInput" class="chatInput" type="text" maxlength="240" placeholder="Ketik pesan..." />
+      <button id="chatSend" class="chatSend" type="submit">Kirim</button>
+    </form>
+  </section>
+
+
   <!-- Canvas for game -->
   <canvas id="gameCanvas" class="gameCanvas"></canvas>
 
@@ -35,4 +60,3 @@
   <script src="/client.js" defer></script>
 </body>
 </html>
-

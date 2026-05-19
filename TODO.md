@@ -1,0 +1,22 @@
+# TODO - Chat UI + Profanity Filter (Socket.io)
+
+- [ ] Add modern floating chat toggle button (top-right) to `public/index.html`
+- [ ] Add hidden chat panel markup: message list (scrollable), input, send button to `public/index.html`
+- [ ] Add CSS for dark/glassmorphism chat panel and button in `public/style.css`
+- [ ] Implement client chat logic in `public/client.js`:
+  - [ ] Toggle panel visibility on button click
+  - [ ] Emit `chat:message` on send
+  - [ ] Render incoming `chat:message` as `Nama : Isi Pesan`
+  - [ ] Optional: auto-scroll to bottom when user near bottom
+  - [ ] Ensure mouse/keyboard focus doesn’t break movement
+- [ ] Implement profanity filter + message relay on server in `server.js`:
+  - [ ] Maintain chat history array or just relay
+  - [ ] Create simple list-based filter; replace matched words with `####`
+  - [ ] Validate payload; get sender name from players map
+  - [ ] Broadcast sanitized message to all players via Socket.io
+- [ ] Wire up client to receive history on join (optional but nice)
+- [ ] Run `npm start` and quick manual test:
+  - [ ] Chat opens/closes
+  - [ ] Messages display correctly
+  - [ ] Profanity becomes `####`
+  - [ ] Player movement still works while chat is open

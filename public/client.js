@@ -5,6 +5,16 @@
   const errorBox = document.getElementById('errorBox');
   const countText = document.getElementById('countText');
 
+  // Chat UI
+  const chatToggle = document.getElementById('chatToggle');
+  const chatClose = document.getElementById('chatClose');
+  const chatPanel = document.getElementById('chatPanel');
+  const chatHistory = document.getElementById('chatHistory');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const chatSend = document.getElementById('chatSend');
+
+
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
 
@@ -282,10 +292,85 @@
     requestAnimationFrame(tick);
   }
 
+  // ===== Chat logic =====
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '<')
+      .replace(/>/g, '>')
+      .replace(/\"/g, '"')
+      .replace(/'/g, '&#039;');
+  }
+
+  function addChatMessage({ name, text }) {
+    const atBottom = (() => {
+      const threshold = 80; // px
+      return chatHistory.scrollHeight - chatHistory.scrollTop - chatHistory.clientHeight < threshold;
+    })();
+
+    const msgEl = document.createElement('div');
+    msgEl.className = 'chatMsg';
+
+    const safeName = escapeHtml(name || 'Player');
+    const safeText = escapeHtml(text || '');
+
+    msgEl.innerHTML = `
+      <span class="name">${safeName}</span>
+      <span class="sep">:</span>
+      <span class="text">${safeText}</span>
+    `;
+
+    chatHistory.appendChild(msgEl);
+
+    if (atBottom) {
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+  }
+
+  function setChatOpen(open) {
+    if (open) {
+      chatPanel.classList.add('isOpen');
+      chatPanel.setAttribute('aria-hidden', 'false');
+      // Focus input, but do not prevent movement when user cancels quickly.
+      setTimeout(() => {
+        try { chatInput.focus(); } catch {}
+      }, 0);
+    } else {
+      chatPanel.classList.remove('isOpen');
+      chatPanel.setAttribute('aria-hidden', 'true');
+      try { chatToggle.focus(); } catch {}
+    }
+  }
+
+  chatToggle.addEventListener('click', () => {
+    const open = !chatPanel.classList.contains('isOpen');
+    setChatOpen(open);
+  });
+  chatClose.addEventListener('click', () => setChatOpen(false));
+
+  chatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = (chatInput.value || '').trim();
+    if (!text) return;
+    if (!socket.connected) socket.connect();
+    socket.emit('chat:message', { text });
+    chatInput.value = '';
+    // keep focus so user can continue typing
+    chatInput.focus();
+  });
+
+  // Prevent arrow keys from messing with movement while typing
+  chatInput.addEventListener('keydown', (e) => {
+    // We allow Enter to submit; everything else prevents affecting global keys set.
+    if (e.key === 'Enter') return;
+    e.stopPropagation();
+  });
+
   // UI Join
   function hideOverlay() {
     overlay.style.display = 'none';
   }
+
 
   function setError(msg) {
     errorBox.textContent = msg || '';
@@ -354,7 +439,14 @@
     players.delete(id);
   });
 
+  // Chat listeners
+  socket.on('chat:message', (payload) => {
+    if (!payload) return;
+    addChatMessage({ name: payload.name, text: payload.text });
+  });
+
   // Start with overlay focus
   setTimeout(() => nameInput.focus(), 0);
 })();
+
 

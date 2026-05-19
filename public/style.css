@@ -135,3 +135,113 @@ html, body {
 
 /* On-screen triangle styling uses canvas; no extra CSS. */
 
+/* ===== Chat UI ===== */
+.chatToggle{
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 40;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(10,10,14,0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(255,255,255,0.92);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+}
+.chatToggle:hover{ border-color: rgba(108,240,255,0.35); color: rgba(108,240,255,0.95); }
+.chatToggle:active{ transform: translateY(1px); }
+.chatToggle svg{ width: 22px; height: 22px; }
+
+.chatPanel{
+  position: fixed;
+  top: 70px;
+  right: 14px;
+  z-index: 45;
+  width: min(360px, calc(100vw - 28px));
+  height: min(520px, calc(100vh - 100px));
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(10,10,14,0.52);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 24px 90px rgba(0,0,0,0.55);
+  display: none;
+  overflow: hidden;
+}
+
+.chatPanel.isOpen{ display: flex; flex-direction: column; }
+
+.chatHeader{
+  padding: 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
+}
+.chatTitle{ color: rgba(255,255,255,0.92); font-weight: 800; letter-spacing: 0.2px; }
+.chatClose{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.85);
+  border-radius: 12px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+}
+.chatClose:hover{ border-color: rgba(255,92,122,0.45); color: rgba(255,92,122,0.95); }
+
+.chatHistory{
+  padding: 12px 12px;
+  flex: 1;
+  overflow: auto;
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.9);
+}
+
+.chatMsg{
+  margin: 0 0 8px 0;
+  line-height: 1.25;
+  word-break: break-word;
+}
+.chatMsg .name{ color: rgba(108,240,255,0.98); font-weight: 900; }
+.chatMsg .sep{ color: rgba(255,255,255,0.55); margin: 0 4px; }
+.chatMsg .text{ color: rgba(255,255,255,0.92); }
+
+.chatForm{
+  padding: 10px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  gap: 8px;
+  background: rgba(0,0,0,0.14);
+}
+.chatInput{
+  flex: 1;
+  min-width: 0;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.92);
+  outline: none;
+}
+.chatInput::placeholder{ color: rgba(255,255,255,0.35); }
+
+.chatSend{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 900;
+  color: rgba(0,0,0,0.86);
+  background: linear-gradient(180deg, rgba(108,240,255,0.95), rgba(108,240,255,0.6));
+}
+.chatSend:active{ transform: translateY(1px); }
+
+

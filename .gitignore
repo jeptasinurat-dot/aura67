@@ -1,0 +1,61 @@
+# =============================
+# Node.js / Express / Socket.io
+# =============================
+
+# Dependencies
+node_modules/
+
+# Node/V8 logs
+npm-debug.log*
+node-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# Local environment / secrets
+.env
+.env.*
+*.env
+*.env.*
+
+# Runtime data
+*.pid
+*.seed
+*.pid.lock
+
+# Logs
+logs/
+*.log
+
+# Coverage / testing
+coverage/
+*.lcov
+
+# Build output (if any)
+dist/
+build/
+out/
+
+# Optional: cache
+.cache/
+
+# Next.js (if ever used)
+.next/
+out/
+
+# =============================
+# End
+# =============================
+

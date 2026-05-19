@@ -1,0 +1,14 @@
+{
+  "name": "realtime-multiplayer-triangle-game",
+  "version": "1.0.0",
+  "description": "Realtime multiplayer game (Node.js + Express + Socket.io + Vanilla JS)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
+

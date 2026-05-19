@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Realtime Multiplayer - Triangle</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- Overlay join dialog -->
+  <div id="overlay" class="overlay">
+    <div class="dialog">
+      <h1 class="title">Masukkan Nama Player</h1>
+      <input id="nameInput" class="nameInput" maxlength="24" autocomplete="off" placeholder="Nama Player" />
+      <button id="okBtn" class="okBtn">OK</button>
+      <div id="errorBox" class="errorBox" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- UI (optional) -->
+  <div id="hud" class="hud" aria-hidden="true">
+    <div id="countText"></div>
+  </div>
+
+  <!-- Canvas for game -->
+  <canvas id="gameCanvas" class="gameCanvas"></canvas>
+
+  <!-- Virtual joystick (hidden on PC) -->
+  <div id="joystick" class="joystick" aria-label="Virtual Joystick">
+    <div id="joyBase" class="joy-base"></div>
+    <div id="joyKnob" class="joy-knob"></div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="/client.js" defer></script>
+</body>
+</html>
+
